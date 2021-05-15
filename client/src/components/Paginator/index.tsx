@@ -17,7 +17,10 @@ const Paginator = () => {
         Showing {users.length} of {total}
       </small>
       <div className="paginator__container">
-        <button className="paginator__btn" onClick={() => fetchPage(page - 1)}>
+        <button
+          className="paginator__btn"
+          onClick={() => (page > 1 ? fetchPage(page - 1) : undefined)}
+        >
           Previous
         </button>
         <button className="paginator__btn" onClick={() => fetchPage(page + 1)}>

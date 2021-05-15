@@ -6,9 +6,12 @@ const List: React.FC = () => {
   const {
     state: { users },
   } = React.useContext(UsersContext);
+  if (users.length === 0) {
+    return <h3>No users found =(</h3>;
+  }
   return (
     <ul>
-      {users.map((user) => (
+      {users?.map((user) => (
         <Item key={user._id} user={user} />
       ))}
     </ul>
