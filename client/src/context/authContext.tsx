@@ -9,6 +9,8 @@ interface Context {
   isLoggedIn: Boolean;
   isAdmin: Boolean;
   token: string;
+  status: "init" | "loading" | "done" | "error";
+  error: string;
 }
 
 const AuthContext = React.createContext({} as Context);
@@ -18,29 +20,27 @@ const AuthProvider: React.FC = ({ children }) => {
   const [token, setToken] = React.useState<string>("");
   const [status, setStatus] =
     React.useState<"init" | "loading" | "done" | "error">("init");
+  const [error, setError] = React.useState<string>("");
+
   async function login(username: string, password: string) {
-    console.log(username, password);
     try {
       setStatus("loading");
       const user = await api.login(username, password);
       setUser({ username: user.username, isAdmin: Boolean(user.admin) });
       setToken(user.token);
       setStatus("done");
+      setError("");
     } catch (error) {
-      console.log(error);
+      setUser({} as Auth);
       setStatus("error");
+      setError(error.message);
     }
   }
 
   function logout() {
     setUser(undefined);
   }
-  {
-    status === "loading" && <div>Loading...</div>;
-  }
-  {
-    status === "error" && <div>Ops...</div>;
-  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -48,8 +48,10 @@ const AuthProvider: React.FC = ({ children }) => {
         login,
         token,
         logout,
-        isLoggedIn: user !== undefined,
+        isLoggedIn: Boolean(user && token),
         isAdmin: user ? user.isAdmin : false,
+        status,
+        error,
       }}
     >
       {children}

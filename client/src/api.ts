@@ -1,6 +1,6 @@
-import { Auth, User } from './types';
+import { User } from './types';
 
-export default {
+const api = {
     login: (username: string, password: string): Promise<{ message: string, token: string, admin: Boolean, username: string }> => {
         return fetch("http://localhost:4200/login", {
             method: 'post',
@@ -17,7 +17,7 @@ export default {
                 throw Error(err)
             })
     },
-    getAll: (page: number = 1, token: string): Promise<{ results: User[], total: number, page: number }> => {
+    getAll: (page: number = 0, token: string): Promise<{ results: User[], total: number, page: number }> => {
         return fetch(`http://localhost:4200/users?page=${page}`, {
             method: 'get',
             headers: { 'Content-Type': 'application/json', "Authorization": "Bearer " + token },
@@ -30,6 +30,20 @@ export default {
             })
     },
     create: (user: Omit<User, "_id">, token: string): Promise<void> => {
-        return Promise.resolve()
+        console.log("porque viene aca?")
+        return fetch(`http://localhost:4200/users`, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json', "Authorization": "Bearer " + token },
+            body: JSON.stringify({ username: user.username, password: user.password, email: user.email })
+        })
+            .then(res => {
+                return ;
+            })
+            .catch(err => {
+                console.log(err)
+                throw Error(err)
+            })
     }
 }
+
+export default api;

@@ -6,15 +6,23 @@ import Login from "./screens/Login";
 import { UsersProvider } from "./context/usersContext";
 
 const App: React.FC = () => {
-  const { isLoggedIn, logout } = React.useContext(AuthContext);
+  const { isLoggedIn, logout, username } = React.useContext(AuthContext);
   return (
     <div className="App">
       <header className="App-header">
+        {isLoggedIn && (
+          <nav>
+            <h3>Welcome back, {username}! </h3>
+            <button className="btn logout__btn" onClick={logout}>
+              logout
+            </button>
+          </nav>
+        )}
         <h1>Users management</h1>
-        {isLoggedIn && <button onClick={logout}>logout</button>}
+
         {isLoggedIn ? (
           <UsersProvider>
-            <Home />{" "}
+            <Home />
           </UsersProvider>
         ) : (
           <Login />

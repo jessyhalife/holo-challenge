@@ -1,40 +1,29 @@
 import React from "react";
+import Item from "../components/Item";
 import { AuthContext } from "../context/authContext";
 import { UsersContext } from "../context/usersContext";
 
-const Home = () => {
-  const {
-    state: { users, page, total },
-    actions: { get, create },
-  } = React.useContext(UsersContext);
-  const { isAdmin } = React.useContext(AuthContext);
-  React.useEffect(() => {
-      console.log("ke onda")
-    get();
-  }, []);
+import "./Home.styles.css";
+import Paginator from "../components/Paginator/index";
+import Form from "../components/Form";
+import List from "../components/List/index";
 
-  function fetchPage(page: number) {
-    get(page);
-  }
+const Home = () => {
+  const { isAdmin } = React.useContext(AuthContext);
+  const { status } = React.useContext(UsersContext);
+  const [isCreating, setIsCreating] = React.useState<Boolean>(false);
   return (
-    <div>
-      <ul>
-        {users.map((user) => (
-          <li key={user._id}>{user.username}</li>
-        ))}
-      </ul>
-      <button onClick={() => fetchPage(page - 1)}>Prev</button>
-      <button onClick={() => fetchPage(page + 1)}>Next</button>
-      <div>Showing 4 of {total}</div>
+    <div className="container">
       {isAdmin && (
-        <button
-          onClick={() =>
-            create({ username: "test", email: "jes", password: "1234" })
-          }
-        >
-          Create new!
+        <button className="btn add__btn" onClick={() => setIsCreating(true)}>
+          + Add new
         </button>
       )}
+      {isCreating && <Form closeForm={() => setIsCreating(false)} />}
+      {status === "loading" && <h3>Loading..</h3>}
+      {status === "error" && <h3>Oops.. something went wrong.</h3>}
+      <List />
+      <Paginator />
     </div>
   );
 };

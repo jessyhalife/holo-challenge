@@ -1,4 +1,20 @@
 .App {
   text-align: center;
   color: var(--light);
+  padding: 48px;
+  max-width: 520px;
+  margin: auto;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 48px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--light-dark)
+}
+
+.logout__btn {
+ color: black;
 }

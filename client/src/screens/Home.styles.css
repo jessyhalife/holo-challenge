@@ -1,0 +1,12 @@
+.container {
+  max-width: 480px;
+  margin: 24px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.add__btn {
+  max-width: fit-content;
+  align-self: flex-end;
+  background-color: #0275d8;
+}

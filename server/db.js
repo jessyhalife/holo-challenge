@@ -9,6 +9,10 @@ mongoose.connect(config.mongo_uri, {
 
 const db = mongoose.connection;
 
+// db.once("open", () => {
+//   User.remove().then(() => console.log("removed successful"));
+// });
+
 // db.once("open", async () => {
 //   Promise.all([
 //     User.create({ email: "1", username: "User 1", password: "pass1234" }),

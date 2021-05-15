@@ -1,6 +1,7 @@
 :root {
   --dark: #282c34;
   --light: white;
+  --light-dark: #424346;
 }
 body {
   margin: 0;
@@ -12,7 +13,16 @@ body {
   background: var(--dark);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.btn {
+  border-radius: 4px;
+  border: none;
+  padding: 8px 4px;
+  font-weight: bold;
+  color: white;
 }

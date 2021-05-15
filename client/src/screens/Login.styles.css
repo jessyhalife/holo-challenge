@@ -1,0 +1,43 @@
+.login__container {
+  background-color: var(--light-dark);
+  max-width: 480px;
+  margin: 48px auto;
+  padding: 24px;
+  border-radius: 8px;
+}
+.login__form {
+  max-width: 420px;
+  padding: 16px;
+
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.form-group {
+  margin: 4px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+.form-group input {
+  padding: 4px;
+  font-size: 1.1rem;
+}
+
+.login__btn {
+  
+  background-color: #5cb85c;
+}
+
+.form__error {
+  color: #d9534f;
+}
