@@ -57,5 +57,6 @@ El mismo permite:
 - listar usuarios de forma paginada
 - agregar usuarios (si es administrador)
 
+Por razones de tiempo no se implementan test en el front end.
 
 
