@@ -19,7 +19,7 @@ const Paginator = () => {
       <div className="paginator__container">
         <button
           className="paginator__btn"
-          onClick={() => (page > 1 ? fetchPage(page - 1) : undefined)}
+          onClick={() => (page >= 1 ? fetchPage(page - 1) : undefined)}
         >
           Previous
         </button>
